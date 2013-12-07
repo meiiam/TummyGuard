@@ -1,18 +1,42 @@
 <h1>Tummy Guard</h1>
 <h2>Enjoy your food with confidence!</h2>
 
-<div>
-  <button type="button" id="get_loc">Check restaurant nearby</button>
+<div id="get_loc">
+  <button type="button" >Check restaurant nearby</button>
 </div>
-
+<div id="location_data">
+</div>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
-$(document).ready(function () {
-  $("#get_loc").on("click", function(e) {
-    e.preventDefault();
-    navigator.geolocation.getCurrentPosition(function(position) {
-      console.log(position);
+//$(document).ready(function () {
+//  $("#get_loc").on("click", function(e) {
+//    e.preventDefault();
+//    navigator.geolocation.getCurrentPosition(function(position) {
+//      console.log(position);
+//    });
+//  });
+//});
+
+    $(document).ready(function() {
+        var restaurants = [{"restaurant":"Jimmy Johns", "passed":"true"},
+            {"restaurant":"McDonalds", "passed":"false"},
+            {"restaurant":"Taco Bell", "passed":"true"}];
+
+        $("#get_loc button").on("click", function(e) {
+            $("#location_data").empty();
+            jQuery.each( restaurants, function( val ) {
+                $("#location_data").append('<p><span style="color:'+fontColor(restaurants[val].passed)+'">'
+                        +restaurants[val].restaurant+'</span>');
+            });
+
+        });
     });
-  });
-});
+
+    function fontColor(passed){
+        if(passed == "true"){
+            return "green";
+        } else {
+            return "red";
+        }
+    }
 </script>
