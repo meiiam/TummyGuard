@@ -14,23 +14,10 @@
         <p><a class="btn btn-lg btn-success" href="#" role="button">Activate Protection</a></p>
       </div>
 
-      <div class="row marketing">
+      <div id="location_data" class="row marketing">
         <div class="col-lg-6">
-          <h4>Jimmy Johns</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>McDonalds</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Taco Bell</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
         </div>
       </div>
-<div id="get_loc">
-  <button type="button" >Check restaurant nearby</button>
-</div>
-<div id="location_data">
-</div>
 
       <div class="footer">
         <p>&copy; TummyGuard 2013</p>
@@ -56,25 +43,163 @@
 //});
 
     $(document).ready(function() {
-        var restaurants = [{"restaurant":"Jimmy Johns", "passed":"true"},
-            {"restaurant":"McDonalds", "passed":"false"},
-            {"restaurant":"Taco Bell", "passed":"true"}];
 
-        $("#get_loc button").on("click", function(e) {
-            $("#location_data").empty();
-            jQuery.each( restaurants, function( val ) {
-                $("#location_data").append('<p><span style="color:'+fontColor(restaurants[val].passed)+'">'
-                        +restaurants[val].restaurant+'</span>');
+
+        $("#get_loc a").on("click", function(e) {
+            $("#location_data div").empty();
+            jQuery.each( restaurantData.results, function( val ) {
+                $("#location_data div").append(
+                        '<h4>'
+                        + '<p>' + restaurantData.results[val].name + '</p>'
+                        + '</h4>'
+                        + '<p>' + restaurantData.results[val].vicinity + '</p>'
+                        + '<p>Latest Health Check: <span style="color:' + hasPassed(restaurantData.results[val]) + '</span></p>'
+                );
             });
 
         });
     });
 
-    function fontColor(passed){
-        if(passed == "true"){
-            return "green";
+    function hasPassed(restaurant){
+        var text = "";
+        if("true" == restaurant.passedInspection){
+            return 'green">Passed';
         } else {
-            return "red";
+            return 'red">Failed';
         }
     }
+
+    var restaurantData = {
+       "debug_info" : [],
+       "html_attributions" : [],
+       "results" : [
+          {
+             "geometry" : {
+                "location" : {
+                   "lat" : 47.609398,
+                   "lng" : -122.332634
+                }
+             },
+             "passedInspection" : "true",
+             "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+             "id" : "632ba149b95d6e53bae3e3c71e6987877d229e32",
+             "name" : "MOD Super Fast Pizza",
+             "opening_hours" : {
+                "open_now" : true
+             },
+             "photos" : [
+                {
+                   "height" : 314,
+                   "html_attributions" : [],
+                   "photo_reference" : "CnRsAAAAqbylm8SWMu97poMHo_TiV42p8b1SsHjiqTZzt1BxTs-C0abhOeWcAMNzTVHYHJJ7U07aRaUaGSM9EwquBBMTnnKPiGBDTRiwNnujdjeizF5Y3mB3B3nIFf9lTUaSWH7Xf60eCjI2DMQArqPzX1DePRIQWBYwr-HpvxFWNqkO35DSZRoUW9BUe8cVwzLme9MPoFHuNVoWrTk",
+                   "width" : 209
+                }
+             ],
+             "price_level" : 2,
+             "rating" : 4.3,
+             "reference" : "CoQBdgAAAJKyus07FZFktrQt-d0miD5ufPM4tSUuRnCS9XI-nKN_DetQetaUAFdJWvH1On31GL0JXAtnhl3xErcYS75K3k8EhnnkrQDlC0mrJymkmpGnP8u7_hNCNRsrRmyzjbOJfD_gnPYmC7QhB6ZNmALC4fMN2k_eJ6Oln58D83SyPLptEhD4cFRdN7zsR8JZi84wE_qsGhRRaHyG4kHYdrWy3rnNPf7YQM4g5g",
+             "types" : [ "restaurant", "food", "establishment" ],
+             "vicinity" : "1302 6th Avenue, Seattle"
+          },
+          {
+             "geometry" : {
+                "location" : {
+                   "lat" : 47.610065,
+                   "lng" : -122.332941
+                }
+             },
+             "passedInspection" : "true",
+             "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+             "id" : "1da7c2444b0597ad262dd839dc586f5c9adefb63",
+             "name" : "Sullivan's Steakhouse",
+             "opening_hours" : {
+                "open_now" : false
+             },
+             "photos" : [
+                {
+                   "height" : 800,
+                   "html_attributions" : [],
+                   "photo_reference" : "CoQBfAAAAOq6INdVzK4Pe9c50dNHZJkdbFozlCrYJaUE9d8zwqFCHUYgO2LGceWGXxSFxnkSoCooFwXDC0gdMqeBzdD5P64ybMl9HdPd3k7jPvjQnWHWkPfDa__eXAmVoKXYYUDnV6_ACljw9iSXORD0RZdlezEC76FYwpqAOGVeLTbQHoU-EhARWBG0mUFg38Xbv5q2pjW2GhRGNrsWbQsyicFwDQz1HcjYDFTvhQ",
+                   "width" : 533
+                }
+             ],
+             "price_level" : 3,
+             "rating" : 4.3,
+             "reference" : "CoQBdgAAAK1gGmgI6KFabCdMeP1WU5-AmCGdo2JC9eSpQi7MBLRzlOVa2_vlXrQDRseZjLrVuUWpGqtmNdxMV6ft1ImCjm5L-026nucEdeL7if-Hz7Qp_lQpHNoBPrV7Kuco_zaTm0QGN_1U06T3TJkTFQPznniJhwRbM1Z8V4-DD7CCP0XvEhApDfzoHeOnIsCLo4MacS1NGhRUxfOT7N7RI0GbcqBX8IYiTrYG0w",
+             "types" : [ "restaurant", "food", "establishment" ],
+             "vicinity" : "621 Union Street, Seattle"
+          },
+          {
+             "geometry" : {
+                "location" : {
+                   "lat" : 47.609517,
+                   "lng" : -122.333127
+                }
+             },
+             "passedInspection" : "true",
+             "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/cafe-71.png",
+             "id" : "de88f35afa3b87ddf0b022f835d16d325249d783",
+             "name" : "Cafe ABoDegas",
+             "opening_hours" : {
+                "open_now" : true
+             },
+             "photos" : [
+                {
+                   "height" : 960,
+                   "html_attributions" : [],
+                   "photo_reference" : "CnRnAAAANypzX5GFZT2_CcxYvaPRwXdTchxYy--98N6L1xIQ8HcMfG7UbeWbkghVmIT75U2KaYOi-msWji-OHMq96H7gdOn-5ZzdUAjpeFlnuG9hbT06iE3P4s-541woGGMhHGhrfcDZD0kQYTaPBKXBNecD-BIQdSyK36a3blayx2CNoTgl-RoUcI-XyXtwxPc_2flrN45Mw7Wsw-k",
+                   "width" : 684
+                }
+             ],
+             "reference" : "CnRuAAAAHBKlnmwJfB1xOusl8vklROwpxdT-eP4xikwW6JBQQiF6L-R6CulLqBP8GqnZbdfj1ZxRdnycO2q-td75YqsX2s7x6gfQiJSh6YHYjBQPa-vaUbi59mEK4miWAUMfOAp8fpMGqjFRsN7JtNQIJFBU5BIQjE3Sjnnhro9yaUlzQJ9jVhoUAiQZjTfJCA3o41Q_P8r5aIJrsE8",
+             "types" : [ "cafe", "restaurant", "food", "establishment" ],
+             "vicinity" : "1303 6th Avenue, Seattle"
+          },
+          {
+             "geometry" : {
+                "location" : {
+                   "lat" : 47.61002,
+                   "lng" : -122.332733
+                }
+             },
+             "passedInspection" : "false",
+             "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+             "id" : "da0fe326585618205b4f559eb0aec4c63c293686",
+             "name" : "World Fresh Asian Eatery - Union Square",
+             "opening_hours" : {
+                "open_now" : false
+             },
+             "photos" : [
+                {
+                   "height" : 600,
+                   "html_attributions" : [ "From a Google User" ],
+                   "photo_reference" : "CoQBcgAAAM66Ahs_pwEeyB08CX-D08-BKd8Q9BQH6SJJQJC9bwNyvd69Pxq5IvL31KLQr26xvfKZUFCfvdP1d8g7J8_e2W4YuQE5udW-1h8AakeZp8daC32WKTRxF5psIlUtx-1iC3n9yQXqh7xxQhPA4w0tJJEZ6OeahLniaQTO32l0wVqHEhBmNFuIZntodSte5FNEF55mGhRWoFOnMD63Moi-dstfy8VhlnHoYA",
+                   "width" : 800
+                }
+             ],
+             "reference" : "CpQBiAAAABrdeyAp7g9A40Wpyjb27lKsMsiy51T9nseBxN-tIGV84UhlmaoG2nOHtV-1Q1JUqNJir3v4Wriat1QpWD7og8GwRKfLak73FazsPiV6nZ-KXUh1-KeyPqRnKL5BJK4bMHkRjoVQfmcS80M109KoA6ja5pT2qED-qlgWqhv9cgCSwmC3SI2jlot2YV7J6jtyyxIQ0z71q5kCly88mK1OHDJYixoUu-aeuLyevoymi0RQ69PMi2ZWl70",
+             "types" : [ "restaurant", "food", "establishment" ],
+             "vicinity" : "601 Union Street, Seattle"
+          },
+          {
+             "geometry" : {
+                "location" : {
+                   "lat" : 47.610065,
+                   "lng" : -122.33275
+                }
+             },
+             "passedInspection" : "true",
+             "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/cafe-71.png",
+             "id" : "c9caf59a5d08f1402615eacd55361aa050314a78",
+             "name" : "Walla Walla Farms Cafe",
+             "opening_hours" : {
+                "open_now" : true
+             },
+             "reference" : "CoQBdwAAAH9OJohnYLR614yS3Ihp1clT4xv10H27hw0cLjsdaFpUKToZLVuVe-aQlqda4GDxp8WjU_WPJFpeXif6oUs8vOQUkwZ8y0bnDTmdF5Z4I1hIJC0mTQHChf56Vlh7Os2Lx4CqwTaUHvJmmIr1oLl4G0vTdked6iJcjGtKlPa9O4MjEhAiNo_bibPh2dQNU3kbm220GhSqCAIslr8uFty6VrePZL9rJzM9ew",
+             "types" : [ "cafe", "food", "establishment" ],
+             "vicinity" : "601 Union Street #224A, Seattle"
+          }
+       ],
+       "status" : "OK"
+    };
 </script>
