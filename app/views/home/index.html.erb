@@ -8,10 +8,13 @@
         <h3 class="text-muted">Tummy Guard</h3>
       </div>
 
-      <div class="jumbotron" id="get_loc">
-        <h1>Love Your Tummy & Enjoy Food</h1>
-        <p class="lead">Your tummy thanks you!</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Activate Protection</a></p>
+      <div class="jumbotron">
+        <h1>Love Your Tummy &#x2665 Enjoy Food</h1>
+        <p class="lead"><br/>Find safe restaurants near you.<p>
+	<p class="lead">Your tummy thanks you!</p>
+	<p id="get_loc">
+	  <button type="button" class="btn btn-success">Activate Protection</button>
+	</p>
       </div>
 
       <div id="location_data" class="row marketing">
@@ -45,7 +48,7 @@
     $(document).ready(function() {
 
 
-        $("#get_loc a").on("click", function(e) {
+        $("#get_loc button").on("click", function(e) {
             $("#location_data div").empty();
             jQuery.each( restaurantData.results, function( val ) {
                 $("#location_data div").append(
