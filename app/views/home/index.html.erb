@@ -58,6 +58,13 @@
                         + '<p>' + restaurantData.results[val].vicinity + '</p>'
                         + '<p>Latest Health Check: <span style="color:' + hasPassed(restaurantData.results[val]) + '</span></p>'
                 );
+		if("true" ==restaurantData.results[val].passedInspection) {
+		  $("#location_data div h4:last").css({background: '#99ff99'});
+                }
+		else {
+		  $("#location_data div h4:last").css({color: 'white'});
+		  $("#location_data div h4:last").css({background: 'red'});
+                }
             });
 
         });
